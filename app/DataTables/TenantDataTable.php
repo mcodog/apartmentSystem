@@ -22,7 +22,10 @@ class TenantDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'tenant.action')
+            ->addColumn('action', function ($tenant) {
+                return "<span class='d-flex'><a href='". url('tenants/'. $tenant->id .'/edit') ."' class='btn btn-primary'><i class='fas fa-edit'></i></a>&nbsp;<a href='". url('tenants/'. $tenant->id.'/delete') ."' class='btn btn-danger'><i class='fas fa-trash'></i></a></span>";
+
+            })
             ->setRowId('id');
     }
 
@@ -62,17 +65,18 @@ class TenantDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+            
             Column::make('id'),
             Column::make('name'),
             Column::make('emergency_contact_name'),
             Column::make('emergency_contact_number'),
             Column::make('created_at'),
             Column::make('updated_at'),
+            Column::computed('action')
+                  ->exportable(false)
+                  ->printable(false)
+                  ->width(60)
+                  ->addClass('text-center'),
         ];
     }
 

@@ -24,8 +24,33 @@ class TenantController extends Controller
         $newTenant->phone_number = $request->phone;
         $newTenant->emergency_contact_name = $request->emergency_contact_name;
         $newTenant->emergency_contact_number = $request->emergency_contact_number;
+        if(request()->has('image')){
+            // $imagePath = request()->file('image')->store('category', 'public');
+            $newTenant->image = request()->file('image')->store('tenant', 'public');;
+        }
         $newTenant->save();
 
-        return Redirect::to('tenant/index');
+        return Redirect::to('tenants');
+    }
+
+    public function edit($id) {
+        $tenant = Tenant::find($id);
+        return View::make('tenant.edit', compact('tenant'));
+    }
+
+    public function update(Request $request, $id) {
+        $tenant = Tenant::find($id);
+        $tenant->name = $request->name;
+        $tenant->phone_number = $request->phone;
+        $tenant->emergency_contact_name = $request->emergency_contact_name;
+        $tenant->emergency_contact_number = $request->emergency_contact_number;
+        $tenant->save();
+
+        return Redirect::to('tenants');
+    }
+
+    public function delete($id) {
+        Tenant::destroy($id);
+        return Redirect::to('tenants');
     }
 }

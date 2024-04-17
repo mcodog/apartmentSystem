@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TenantController;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use App\Http\Controllers\TenantController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Redirect::to('home');
 });
 
 Auth::routes();
@@ -24,3 +25,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/tenants', [TenantController::class, 'index'])->name('tenants');
 Route::get('/tenants/create', [TenantController::class, 'create'])->name('tenants.create');
 Route::post('/tenants/store', [TenantController::class, 'store'])->name('tenants.store');
+Route::get('/tenants/{id}/edit', [TenantController::class, 'edit'])->name('tenants.edit');
+Route::post('/tenants/{id}/update', [TenantController::class, 'update'])->name('tenants.update');
+Route::get('/tenants/{id}/delete', [TenantController::class, 'delete'])->name('tenants.delete');
