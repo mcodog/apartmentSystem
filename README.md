@@ -1,18 +1,18 @@
-Run thw following commands:
+<h3>Run thw following commands:</h3>
 
-git clone
+> git clone https://github.com/mcodog/apartmentSystem.git
 
-composer install
+> composer install
 
-cp .env.example .env
+> cp .env.example .env
 
-php artisan key:generate
+> php artisan key:generate
 
-php artisan migrate
+> php artisan migrate
 
-npm install
+> npm install
 
-npm run dev
+> npm run dev
 
-php artisan serve
+> php artisan serve
 
