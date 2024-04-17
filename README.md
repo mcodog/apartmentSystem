@@ -1,4 +1,4 @@
-<h3>Run thw following commands:</h3>
+<h3>Run the following commands:</h3>
 
 > git clone https://github.com/mcodog/apartmentSystem.git
 
