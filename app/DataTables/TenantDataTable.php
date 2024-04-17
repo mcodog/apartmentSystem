@@ -26,7 +26,11 @@ class TenantDataTable extends DataTable
                 return "<span class='d-flex'><a href='". url('tenants/'. $tenant->id .'/edit') ."' class='btn btn-primary'><i class='fas fa-edit'></i></a>&nbsp;<a href='". url('tenants/'. $tenant->id.'/delete') ."' class='btn btn-danger'><i class='fas fa-trash'></i></a></span>";
 
             })
-            ->setRowId('id');
+            ->addColumn('image', function ($tenant) {
+                return "<img src='". url($tenant->getImage()) ."' alt='Tenant' style='width:50px;'>";
+            })
+            ->setRowId('id')
+            ->rawColumns(['action', 'image']);
     }
 
     /**
@@ -67,6 +71,7 @@ class TenantDataTable extends DataTable
         return [
             
             Column::make('id'),
+            Column::computed('image'),
             Column::make('name'),
             Column::make('emergency_contact_name'),
             Column::make('emergency_contact_number'),

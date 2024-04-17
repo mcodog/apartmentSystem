@@ -12,8 +12,8 @@ class Tenant extends Model
     public $table = "tenants";
 
     public function getImage(){
-        if($this->img_path){
-            return url('storage/'. $this->img_path);
+        if($this->image){
+            return url('storage/'. $this->image);
         }
         return URL::asset('storage/tenant/default-tenant.png');
     }
