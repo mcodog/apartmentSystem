@@ -17,6 +17,7 @@ class ApartmentController extends Controller
     public function index(ApartmentDataTable $dataTable)
     {
         return $dataTable->render('apartment.index');
+        //aa
     }
 
     /**
