@@ -33,9 +33,11 @@ class BillingDataTable extends DataTable
     public function query(Billing $model): QueryBuilder
     {
         $model = Billing::query()
-        ->leftJoin('tenants', 'tenants.id', '=', 'billing.tenant_id')
-        ->select('tenants.name', 'billing.*');
-
+        ->leftjoin('electricity', 'billing.electricity_id', '=', 'electricity.id')
+        ->leftjoin('water', 'billing.water_id', '=', 'water.id')
+        ->leftjoin('tenants', 'billing.tenant_id', '=', 'tenants.id')
+        ->select('billing.description', 'billing.full_amount', 'billing.id', 'tenants.name', 'billing.date_paid');
+        
         $newDatatable = DataTables::of($model->newQuery())->make(true);
         return $model->newQuery();
     }
@@ -68,19 +70,11 @@ class BillingDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
             Column::make('name'),
-            Column::make('month'),
+            Column::make('description'),
             Column::make('full_amount'),
-            Column::make('status'),
             Column::make('date_paid'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
         ];
     }
 
