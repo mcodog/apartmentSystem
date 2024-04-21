@@ -39,11 +39,18 @@ class ElectricityDataTable extends DataTable
 
                 return $action;
             })
+            ->addColumn('Change_Status', function ($electricity) {
+                if ($electricity->status == 'UNPAID') {
+                    return "<a href=". url('/electricity/' . $electricity->id . '/altStat') ." class='btn btn-primary'>Set as Paid</a>";
+                } else if ($electricity->status == 'PAID') {
+                    return "<a href=" . url('/electricity/' . $electricity->id . '/altStat') ." class='btn btn-secondary'>Set as Unpaid</a>";
+                }
+            })
             ->editColumn('tenant_id', function ($electricity) {
                 return $electricity->tenant->name;
             })
             ->setRowId('id')
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'Change_Status']);
     }
     /**
      * Get the query source of dataTable.
@@ -87,7 +94,9 @@ class ElectricityDataTable extends DataTable
             Column::make('kwh'),
             Column::make('amount_per_kwh'),
             Column::make('amount_due'),
+            Column::make('status'),
             Column::make('deleted_at'),
+            Column::make('Change_Status'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

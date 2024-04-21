@@ -33,11 +33,18 @@ class WaterDataTable extends DataTable
                 $action .= "</span>";
                 return $action;
             })
+            ->addColumn('Change_Status', function ($electricity) {
+                if ($electricity->status == 'UNPAID') {
+                    return "<a href=". url('/water/' . $electricity->id . '/altStat') ." class='btn btn-primary'>Set as Paid</a>";
+                } else if ($electricity->status == 'PAID') {
+                    return "<a href=" . url('/water/' . $electricity->id . '/altStat') ." class='btn btn-secondary'>Set as Unpaid</a>";
+                }
+            })
             ->editColumn('tenant_id', function ($water) {
                 return $water->tenant->name;
             })
             ->setRowId('id')
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'Change_Status']);
     }
 
     /**
@@ -83,6 +90,7 @@ class WaterDataTable extends DataTable
             Column::make('amount_per_head'),
             Column::make('amount_due'),
             Column::make('deleted_at'),
+            Column::make('Change_Status'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

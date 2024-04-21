@@ -3,26 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\Analytics;
+use App\Models\Electricity;
 use App\DataTables\AnalyticsDataTable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use Yajra\DataTables\Facades\DataTables;
 
 class AnalyticsController extends Controller
 {
     public function index(AnalyticsDataTable $dataTable)
     {
-        // $analyticsData = Analytics::with('tenant')
-        //     ->leftJoin('electricity', 'analytics.tenant_id', '=', 'electricity.tenant_id')
-        //     ->leftJoin('water', 'analytics.tenant_id', '=', 'water.tenant_id')
-        //     ->select('analytics.tenant_id',
-        //         DB::raw('COALESCE(SUM(electricity.amount_due), 0) as electricity_amount_due'),
-        //         DB::raw('COALESCE(SUM(water.amount_due), 0) as water_amount_due'))
-        //     ->groupBy('analytics.tenant_id')
-        //     ->get();
+        // $model = DB::table('electricity')
+        //         ->join('tenants', 'tenants.id', '=', 'electricity.tenant_id')
+        //         ->select('electricity.amount_due', 'tenants.name', 'electricity.status')
+        //         ->where('name', 'dsa')
+        //         ->where('status', 'UNPAID')
+        //         ->get();
 
-
+        //         foreach($model AS $data) {
+        //             echo $data->name;
+        //             echo "<br>";
+        //         }
+        
         return $dataTable->render('analytics.index');
 }
+    public function create() {
+        return View::make('apartment.create');
+    }
 
     //     // Calculate overall due and update paid status
     //     foreach ($analyticsData as $data) {

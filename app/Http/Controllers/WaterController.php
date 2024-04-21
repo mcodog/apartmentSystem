@@ -98,4 +98,15 @@ class WaterController extends Controller
         // Redirect to the index page or wherever appropriate
         return redirect()->back()->with('success', 'Water record restored successfully.');
     }
+
+    public function altStatus($id) {
+        $electricity = Water::findOrFail($id);
+        if ($electricity->status == 'UNPAID'){
+            $electricity->status = 'PAID';
+        } else if ($electricity->status == 'PAID'){
+            $electricity->status = 'UNPAID';
+        }
+        $electricity->save();
+        return redirect()->route('water.index');
+    }
 }

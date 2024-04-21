@@ -6,21 +6,20 @@
         <div class="col-md-13">
             <div class="card">
                 <div class="card-header" style="background-color: #99A98F; font-family: Bebas Neue; text-align: center;">
-                    <h1 style="color: white;">Electricity</h1> <!-- Change header to 'Electricity' -->
+                    <h1 style="color: white;">Billing</h1> <!-- Change header to 'Electricity' -->
                 </div>
                 <div class="card-body" style="background-color: #C1D0B5;">
                     <div class="text-center"> <!-- Centering everything -->
                         <div id="dataTableContainer">
                             {{ $dataTable->table(['class' => 'custom-datatable']) }}
                         </div>
-                        <a class="btn btn-success mt-3" href="{{ url('electricity/create') }}">Create New</a> <!-- Centering Create New button -->
+                        <a class="btn btn-success mt-3" href="{{ url('billing/create') }}">Create New</a> <!-- Centering Create New button -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 @endsection
 
 @push('styles')
