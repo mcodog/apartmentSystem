@@ -77,7 +77,7 @@ class ApartmentController extends Controller
         $lastPaymentDate = new \DateTime($electricity->last_payment);
 
         // Add 30 days to the date
-        $lastPaymentDate->modify('+30 days');
+        $lastPaymentDate->modify('+31 days');
 
         // Update the $electricity->last_payment property with the new date
         $electricity->last_payment = $lastPaymentDate->format('Y-m-d');
