@@ -86,7 +86,15 @@ class AnalyticsDataTable extends DataTable
                     $daysDifference = $interval->days;
                     $months = intdiv($daysDifference, 30);
                     $days = $daysDifference % 30;
-                    $result = "$months month" . ($months !== 1 ? 's' : '') . " and $days day" . ($days !== 1 ? 's' : '') ." || Rent amounts to: P" . $months * $temp->amt;
+                    if($months > 1) {
+                        $payment_due = $months * $temp->amt;
+                        for($i = 1; $i < $months; $i++) {
+                            $payment_due = $payment_due + ($temp->amt * .10);
+                        }
+                    } else {
+                        $payment_due = $months * $temp->amt;
+                    }
+                    $result = "$months month" . ($months !== 1 ? 's' : '') . " and $days day" . ($days !== 1 ? 's' : '') ." || Rent amounts to: P" . $payment_due;
                     return $result;
                 }
 

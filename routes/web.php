@@ -9,6 +9,7 @@ use App\Http\Controllers\WaterController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\BillingController;
+use App\DataTables\MonthlyDataTable;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,3 +91,4 @@ Route::get('/apartment/{id}/onepay', [ApartmentController::class, 'onepay'])->na
 Route::get('/billing', [BillingController::class, 'index'])->name('billing.index');
 Route::get('/billing/create', [BillingController::class, 'create'])->name('billing.create');
 Route::get('/billing/store', [BillingController::class, 'store'])->name('billing.store');
+Route::get('/dashboard', [AnalyticsController::class, 'dashboard'])->name('dashboard');
