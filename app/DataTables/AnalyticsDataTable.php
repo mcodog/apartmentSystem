@@ -68,8 +68,8 @@ class AnalyticsDataTable extends DataTable
                 ->select('apartment.rental_fee AS amt', 'tenants.name', 'apartment.description', 'apartment.date_occupied', 'apartment.last_payment AS amt2')
                 ->where('name', $electricity->name)
                 ->get();
-        
-                
+
+
                 if ($model->isEmpty()) {
                     // Return the string "null" if the collection is empty
                     return "Null";
@@ -89,7 +89,7 @@ class AnalyticsDataTable extends DataTable
                     $result = "$months month" . ($months !== 1 ? 's' : '') . " and $days day" . ($days !== 1 ? 's' : '') ." || Rent amounts to: P" . $months * $temp->amt;
                     return $result;
                 }
-               
+
             })
             ->addColumn('overall_due', function ($electricity) {
                 $model = DB::table('water')
@@ -103,7 +103,7 @@ class AnalyticsDataTable extends DataTable
                 foreach($model AS $data) {
                     $num = $num + $data->amt;
                 }
-                
+
                 $model = DB::table('electricity')
                 ->join('tenants', 'tenants.id', '=', 'electricity.tenant_id')
                 ->select('electricity.amount_due AS amt', 'tenants.name', 'electricity.status', 'electricity.tenant_id')
@@ -123,8 +123,8 @@ class AnalyticsDataTable extends DataTable
                 ->select('apartment.rental_fee AS amt', 'tenants.name', 'apartment.description', 'apartment.date_occupied', 'apartment.last_payment AS amt2')
                 ->where('name', $electricity->name)
                 ->get();
-        
-                
+
+
                 if ($model->isEmpty()) {
                     // Return the string "null" if the collection is empty
                     return "Null";
@@ -160,7 +160,7 @@ class AnalyticsDataTable extends DataTable
         // ->leftJoin('water', 'tenants.id', '=', 'water.tenant_id')
         // ->select('electricity.amount_due as electricity_amount_due', 'water.amount_due as water_amount_due', 'tenants.id', 'tenants.name');
 
-        
+
         // $newDatatable = DataTables::of($model->newQuery())->make(true);
         return $model->newQuery();
     }
@@ -193,7 +193,6 @@ class AnalyticsDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
             Column::make('name')->title('Tenant Name'),
             Column::make('Electricity Bill'),
             Column::make('Water Bill'),

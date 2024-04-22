@@ -3,19 +3,38 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-13">
             <div class="card">
-                <div class="card-header">Analytics</div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        {!! $dataTable->table(['class' => 'table table-bordered table-striped']) !!}
+                <div class="card-header" style="background-color: #99A98F; font-family: Bebas Neue; text-align: center;">
+                    <h1 style="color: white;">Analytics</h1> <!-- Change header to 'Analytics' -->
+                </div>
+                <div class="card-body" style="background-color: #C1D0B5;">
+                    <div class="text-center"> <!-- Centering everything -->
+                        <div class="table-responsive">
+                            {!! $dataTable->table(['class' => 'custom-datatable']) !!}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
+
+@push('styles')
+    <style>
+        /* Centering column names */
+        #dataTableContainer thead th {
+            text-align: center;
+        }
+
+        /* Centering action buttons */
+        #dataTableContainer tbody td .d-flex {
+            justify-content: center;
+        }
+    </style>
+@endpush
 
 @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}

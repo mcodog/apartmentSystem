@@ -35,8 +35,8 @@ class ApartmentDataTable extends DataTable
                 ->select('apartment.rental_fee AS amt', 'tenants.name', 'apartment.description', 'apartment.date_occupied', 'apartment.last_payment AS amt2')
                 ->where('tenants.id', $electricity->tenant_id)
                 ->get();
-        
-                
+
+
                 if ($model->isEmpty()) {
                     // Return the string "null" if the collection is empty
                     return "Null";
@@ -57,7 +57,7 @@ class ApartmentDataTable extends DataTable
                     return $result;
                 }
             })
-            
+
             ->setRowId('id')
             ->rawColumns(['action', 'Payment', 'Elapsed Days Since Last Payment']);
     }
@@ -98,11 +98,7 @@ class ApartmentDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+            
             Column::make('id'),
             Column::make('description'),
             Column::make('rental_fee'),
