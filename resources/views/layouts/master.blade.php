@@ -208,17 +208,17 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/analytics" class="nav-link text-white">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                        <i class="bi bi-clipboard-data"></i>
-                        Analytics
-                        </a>
-                    </li>
-                    <li>
                         <a href="/apartment" class="nav-link text-white">
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
                         <i class="bi bi-clipboard-data"></i>
                         Apartment
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/analytics" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+                        <i class="bi bi-clipboard-data"></i>
+                        Analytics
                         </a>
                     </li>
                 </ul>
