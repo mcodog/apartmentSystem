@@ -180,7 +180,7 @@
                 <hr>
                 <ul id="navLinks" class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="/home" class="nav-link text-white" aria-current="page">
+                        <a href="/dashboard" class="nav-link text-white" aria-current="page">
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                         <i class="bi bi-house-door"></i>
                         Home
@@ -210,8 +210,15 @@
                     <li>
                         <a href="/apartment" class="nav-link text-white">
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                        <i class="bi bi-cash"></i>
+                        <i class="bi bi-house"></i>
                         Apartment
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/billing" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+                        <i class="bi bi-cash"></i>
+                        Billing
                         </a>
                     </li>
                     <li>
@@ -219,20 +226,6 @@
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
                         <i class="bi bi-clipboard-data"></i>
                         Analytics
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/apartment" class="nav-link text-white">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                        <i class="bi bi-clipboard-data"></i>
-                        Apartment
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/billing" class="nav-link text-white">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                        <i class="bi bi-clipboard-data"></i>
-                        Billing
                         </a>
                     </li>
                 </ul>

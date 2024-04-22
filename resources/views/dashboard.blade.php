@@ -34,6 +34,13 @@
         #dataTableContainer tbody td .d-flex {
             justify-content: center;
         }
+
+        .dataTables_scrollBody {
+            overflow-x: scroll !important;
+            overflow-y: hidden !important;
+            position: absolute !important;
+            bottom: 0 !important;
+        }
     </style>
 @endpush
 
