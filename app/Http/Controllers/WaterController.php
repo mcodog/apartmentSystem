@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\DataTables\WaterDataTable; // Import the WaterDataTable class
+use App\Models\Billing;
 use App\Models\Water; // Import the Water model
 use App\Models\Tenant; // Import the Tenant model
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
+use DateTime;
 
 class WaterController extends Controller
 {
@@ -103,8 +105,50 @@ class WaterController extends Controller
         $electricity = Water::findOrFail($id);
         if ($electricity->status == 'UNPAID'){
             $electricity->status = 'PAID';
+            $column = 'water_id';
+            $value = $id;
+
+            $record = Billing::where($column, $value)->first();
+
+            if ($record) {
+                $dateToday = New DateTime();
+                $record->description = "Pay Water Bill";
+                $record->date_paid = $dateToday;
+                $record->full_amount = $electricity->amount_due;
+                $record->save();
+            } else {
+                $dateToday = New DateTime();
+                $newBilling = new Billing();
+                $newBilling->description = "Pay Water Bill";
+                $newBilling->tenant_id = $electricity->tenant_id;
+                $newBilling->full_amount = $electricity->amount_due;
+                $newBilling->date_paid = $dateToday;
+                $newBilling->water_id = $electricity->id;
+                $newBilling->save();
+            }
         } else if ($electricity->status == 'PAID'){
             $electricity->status = 'UNPAID';
+            $column = 'water_id';
+            $value = $id;
+
+            $record = Billing::where($column, $value)->first();
+
+            if ($record) {
+                $dateToday = New DateTime();
+                $record->description = "Revoke Water Bill Payment";
+                $record->date_paid = $dateToday;
+                $record->full_amount = $electricity->amount_due;
+                $record->save();
+            } else {
+                $dateToday = New DateTime();
+                $newBilling = new Billing();
+                $newBilling->description = "Revoke Water Bill Payment";
+                $newBilling->tenant_id = $electricity->tenant_id;
+                $newBilling->full_amount = $electricity->amount_due;
+                $newBilling->date_paid = $dateToday;
+                $newBilling->water_id = $electricity->id;
+                $newBilling->save();
+            }
         }
         $electricity->save();
         return redirect()->route('water.index');

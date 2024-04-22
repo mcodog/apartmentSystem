@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\DataTables\ElectricityDataTable; // Import the ElectricityDataTable class
 use App\Models\Electricity; // Import the Electricity model
+use App\Models\Billing; // Import the Electricity model
 use App\Models\Tenant; // Import the Tenant model
 use Illuminate\Support\Facades\Redirect;
+use DateTime;
 use Illuminate\Support\Facades\View;
 
 class ElectricityController extends Controller
@@ -103,8 +105,50 @@ class ElectricityController extends Controller
         $electricity = Electricity::findOrFail($id);
         if ($electricity->status == 'UNPAID'){
             $electricity->status = 'PAID';
+            $column = 'electricity_id';
+            $value = $id;
+
+            $record = Billing::where($column, $value)->first();
+
+            if ($record) {
+                $dateToday = New DateTime();
+                $record->description = "Pay Electric Bill";
+                $record->date_paid = $dateToday;
+                $record->full_amount = $electricity->amount_due;
+                $record->save();
+            } else {
+                $dateToday = New DateTime();
+                $newBilling = new Billing();
+                $newBilling->description = "Pay Electric Bill";
+                $newBilling->tenant_id = $electricity->tenant_id;
+                $newBilling->full_amount = $electricity->amount_due;
+                $newBilling->date_paid = $dateToday;
+                $newBilling->electricity_id = $electricity->id;
+                $newBilling->save();
+            }
         } else if ($electricity->status == 'PAID'){
             $electricity->status = 'UNPAID';
+            $column = 'electricity_id';
+            $value = $id;
+
+            $record = Billing::where($column, $value)->first();
+
+            if ($record) {
+                $dateToday = New DateTime();
+                $record->description = "Revoke Electricity Bill Payment";
+                $record->date_paid = $dateToday;
+                $record->full_amount = $electricity->amount_due;
+                $record->save();
+            } else {
+                $dateToday = New DateTime();
+                $newBilling = new Billing();
+                $newBilling->description = "Revoke Electricity Bill Payment";
+                $newBilling->tenant_id = $electricity->tenant_id;
+                $newBilling->full_amount = $electricity->amount_due;
+                $newBilling->date_paid = $dateToday;
+                $newBilling->electricity_id = $electricity->id;
+                $newBilling->save();
+            }
         }
         $electricity->save();
         return redirect()->route('electricity.index');

@@ -13,7 +13,6 @@
                         <div id="dataTableContainer">
                             {{ $dataTable->table(['class' => 'custom-datatable']) }}
                         </div>
-                        <a class="btn btn-success mt-3" href="{{ url('billing/create') }}">Create New</a> <!-- Centering Create New button -->
                     </div>
                 </div>
             </div>
